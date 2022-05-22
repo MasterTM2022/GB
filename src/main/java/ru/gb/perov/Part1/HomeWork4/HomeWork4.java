@@ -1,4 +1,4 @@
-package ru.gb.perov.HomeWork4;
+package ru.gb.perov.Part1.HomeWork4;
 
 import javax.swing.*;
 import java.util.Random;

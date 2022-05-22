@@ -1,4 +1,4 @@
-package ru.gb.perov.HomeWork6;
+package ru.gb.perov.Part1.HomeWork6;
 
 public class Cat extends Animal {
     String color;

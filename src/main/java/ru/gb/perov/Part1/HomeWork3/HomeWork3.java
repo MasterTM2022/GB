@@ -1,4 +1,4 @@
-package ru.gb.perov.HomeWork3;
+package ru.gb.perov.Part1.HomeWork3;
 
 import java.util.Arrays;
 
@@ -203,4 +203,4 @@ public class HomeWork3 {
         return array;
     }
 
-}
+    }

@@ -1,4 +1,4 @@
-package ru.gb.perov.HomeWork4;
+package ru.gb.perov.Part1.HomeWork4;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-import static ru.gb.perov.HomeWork4.HomeWork4.*;
+import static ru.gb.perov.Part1.HomeWork4.HomeWork4.*;
 
 public class MyWindow extends JFrame {
     int gap = 1;

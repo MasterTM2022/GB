@@ -1,4 +1,4 @@
-package ru.gb.perov.HomeWork2;
+package ru.gb.perov.Part1.HomeWork2;
 
 public class HomeWork2 {
     public static void main(String[] args) {

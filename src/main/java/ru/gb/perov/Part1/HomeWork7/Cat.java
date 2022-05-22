@@ -1,4 +1,4 @@
-package ru.gb.perov.HomeWork7;
+package ru.gb.perov.Part1.HomeWork7;
 
 public class Cat {
     private String name;
