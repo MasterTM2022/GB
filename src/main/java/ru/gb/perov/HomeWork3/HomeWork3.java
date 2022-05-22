@@ -6,15 +6,19 @@ public class HomeWork3 {
     public static void main(String[] args) {
 //        1
         reverse();
+        System.out.println("*******************");
 
 //        2
         fulfill();
+        System.out.println("*******************");
 
 //        3
         doubleSix();
+        System.out.println("*******************");
 
 //        4
         cross(10);
+        System.out.println("*******************");
 
 //        5
         System.out.println(Arrays.toString(arrayReturn(10, 5)));
@@ -22,10 +26,12 @@ public class HomeWork3 {
 
 //        6
         math();
+        System.out.println("*******************");
 
 //        7
         int[] array = new int[1000];
         System.out.println(half(fillArray(array.length)));
+        System.out.println("*******************");
 
 //        8
         int[] arrayShift = new int[100];
@@ -33,6 +39,7 @@ public class HomeWork3 {
         System.out.println(Arrays.toString(arrayShift));
         shift(arrayShift, 90);
         System.out.println(Arrays.toString(arrayShift));
+        System.out.println("*******************");
     }
 
     public static void reverse() {
@@ -45,7 +52,6 @@ public class HomeWork3 {
             }
             System.out.println(i);
         }
-        System.out.println("*******************");
     }
 
     public static void fulfill() {
@@ -55,7 +61,6 @@ public class HomeWork3 {
             i = j++;
             System.out.println(i);
         }
-        System.out.println("*******************");
     }
 
     public static void doubleSix() {
@@ -64,7 +69,6 @@ public class HomeWork3 {
             if (i < 6) i = i * 2;
             System.out.println(i);
         }
-        System.out.println("*******************");
     }
 
     public static void cross(int size) {
@@ -77,11 +81,21 @@ public class HomeWork3 {
             }
         }
         Arrays.stream(array).map(Arrays::toString).forEach(System.out::println); // честно стырил в интернете эту строчку,
-                                                                                    // пока не понимаю как работает, но, вах! как она работает....
-                                                                                    // до Stringbuilder-а пока не дошел, но уже слышал, что
-                                                                                    // складывать строки в цикле - не комильфо, поэтому решил
-                                                                                    // вывод массива в консоль сплагиатить...
+        // пока не понимаю как работает, но, вах! как она работает....
+        // до Stringbuilder-а пока не дошел, но уже слышал, что
+        // складывать строки в цикле - не комильфо, поэтому решил
+        // вывод массива в консоль сплагиатить...
         System.out.println("*******************");
+
+        //var 2: с одним циклом... (сначала сделала домашку, потом посмотрел по ней лекцию, где был коммент о попытке в один цикл...
+        //жаль, что сам не сообразил сразу, что можно подумать в этом направлении... вернулся - передалал...
+        //видимо смутил в задаче акцент "нарисовать хотя бы одну диагональ"... из-за этого кажтся, что это две подзадачи со всеми вытекающими...
+        int[][] array2 = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            array2[i][i] = 1;
+            array2[i][size - 1 - i] = 1;
+        }
+        Arrays.stream(array2).map(Arrays::toString).forEach(System.out::println);
     }
 
     public static int[] arrayReturn(int len, int initialValue) {
@@ -116,7 +130,6 @@ public class HomeWork3 {
         System.out.println("минимум = " + min);
         System.out.println("среднее = " + String.format("%.2f", (double) sum / count));
         System.out.println("сумма = " + sum);
-        System.out.println("*******************");
     }
 
     public static boolean half(int[] array) {
@@ -172,7 +185,7 @@ public class HomeWork3 {
             oneShiftArray[0] = buf;
         } else {
             int buf = oneShiftArray[0];
-            for (int j = 0; j < oneShiftArray.length-1; j++) {
+            for (int j = 0; j < oneShiftArray.length - 1; j++) {
                 oneShiftArray[j] = oneShiftArray[j + 1];
             }
             oneShiftArray[oneShiftArray.length - 1] = buf;
