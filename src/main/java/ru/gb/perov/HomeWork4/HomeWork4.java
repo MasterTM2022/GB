@@ -7,7 +7,7 @@ public class HomeWork4 {
     public static char[][] map;
     public static final int SIZE = 7;
     public static final int DOTS_TO_WIN = 5; // не менее 2, самые классные рубилова идут при DOTS_TO_WIN = SIZE  - [1 или 2]  ))))
-    public static final int DIFFICULT_LEVEL = 2; // в интервале от 0 до (DOTS_TO_WIN - 1), 0 - рандомно, 1 - анализ шахов в один ход, 2 - шахов в два хода и т.д.
+    public static final int DIFFICULT_LEVEL = 3; // в интервале от 0 до (DOTS_TO_WIN - 1), 0 - рандомно, 1 - анализ шахов в один ход, 2 - шахов в два хода и т.д.
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
