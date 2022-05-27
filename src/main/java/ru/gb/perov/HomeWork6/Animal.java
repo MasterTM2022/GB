@@ -80,33 +80,9 @@ public abstract class Animal {
         this.sex = sex;
     }
 
-    public void run(int distance) {
-        if (distance < 0) {
-            System.out.println(name + "не умеет бегать задом");
-        } else if (distance <= runAbility) {
-            System.out.println(name + (sex ? " пробежал" : " пробежала") + " дистанцию " + distance + "м.");
-        } else {
-            System.out.println(name + (sex ? " пробежал" : " пробежала") + " дистанцию " + distance + "м. за "
-                    + (distance / runAbility + (distance % runAbility == 0 ? 0 : 1)) + " забега");
-        }
+    public abstract void run(int distance);
 
-    }
-
-    public void swim(int distance) {
-        if (swimAbility == 0) {
-            System.out.println(name + " не умеет плавать!!!");
-        } else {
-            if (distance < 0) {
-                System.out.println(name + "не умеет плавать задом");
-            } else if (distance <= swimAbility) {
-                System.out.println(name + (sex ? " проплыл" : " проплыла") + " дистанцию " + distance + "м.");
-            } else {
-                System.out.println(name + (sex ? " проплыл" : " проплыла") + " дистанцию " + distance + "м. за "
-                        + (distance / swimAbility + (distance % swimAbility == 0 ? 0 : 1)) + " заплыва");
-            }
-        }
-
-    }
+    public abstract  void swim(int distance);
 
     @Override
     public String toString() {
