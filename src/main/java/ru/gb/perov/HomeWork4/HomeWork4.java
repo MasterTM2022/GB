@@ -1,9 +1,13 @@
 package ru.gb.perov.HomeWork4;
 
+import javax.swing.*;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.lang.Boolean.TRUE;
+
 public class HomeWork4 {
+    public static final boolean GUI = TRUE;
     public static char[][] map;
     public static final int SIZE = 7;
     public static final int DOTS_TO_WIN = 5; // не менее 2, самые классные рубилова идут при DOTS_TO_WIN = SIZE  - [1 или 2]  ))))
@@ -18,25 +22,29 @@ public class HomeWork4 {
 
     public static void main(String[] args) {
         initMap();
-        printMap();
-        System.out.println("Победит тот, чья непрерывная цепочка будет не менее «" + DOTS_TO_WIN + " в ряд» (в том числе по диагонали)");
-        while (true) {
-            if (humanTurn()) {
-                break;
+        if (GUI) {
+            new MyWindow();
+        } else {
+            printMap();
+            System.out.println("Победит тот, чья непрерывная цепочка будет не менее «" + DOTS_TO_WIN + " в ряд» (в том числе по диагонали)");
+            while (true) {
+                if (humanTurn()) {
+                    break;
+                }
+                if (isMapFull()) {
+                    System.out.println("Ничья");
+                    break;
+                }
+                if (aiTurn()) {
+                    break;
+                }
+                if (isMapFull()) {
+                    System.out.println("Ничья");
+                    break;
+                }
             }
-            if (isMapFull()) {
-                System.out.println("Ничья");
-                break;
-            }
-            if (aiTurn()) {
-                break;
-            }
-            if (isMapFull()) {
-                System.out.println("Ничья");
-                break;
-            }
+            System.out.println("Игра закончена");
         }
-        System.out.println("Игра закончена");
     }
 
     public static void initMap() {
@@ -117,6 +125,15 @@ public class HomeWork4 {
         }
     }
 
+    public static boolean humanTurnGUI(int y, int x) {
+        map[y][x] = DOT_X;
+        if (checkWin(y, x, 0, false)[2] > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean aiTurn() {
         int x, y;
         if (DIFFICULT_LEVEL > 0) {
@@ -154,6 +171,39 @@ public class HomeWork4 {
             return false;
         }
 
+    }
+    public static int[] aiTurnGUI() {
+        int x, y;
+        int[] turn;
+        if (DIFFICULT_LEVEL > 0) {
+            turn = realAiTurn(DOT_O);
+
+            if (turn[0] == SIZE) {
+                turn = realAiTurn(DOT_X);
+            } else {
+                x = turn[0];
+                y = turn[1];
+            }
+            if (turn[0] == SIZE) {
+                do {
+                    x = rand.nextInt(SIZE);
+                    y = rand.nextInt(SIZE);
+                } while (!isCellValid(x, y));
+            } else {
+                x = turn[0];
+                y = turn[1];
+            }
+        } else {
+            do {
+                x = rand.nextInt(SIZE);
+                y = rand.nextInt(SIZE);
+                turn = new int[]{y, x};
+            } while (!isCellValid(x, y));
+        }
+        map[y][x] = DOT_O;
+        turn[0] = y;
+        turn[1] = x;
+        return turn;
     }
 
     public static int[] realAiTurn(char dotForCheck) {
@@ -361,4 +411,11 @@ public class HomeWork4 {
         }
         return checkString;
     }
+
+    public static void PopUpJava(String message) {
+        JFrame jFrame = new JFrame();
+        JOptionPane.showMessageDialog(jFrame, message);
+    }
+
+
 }
