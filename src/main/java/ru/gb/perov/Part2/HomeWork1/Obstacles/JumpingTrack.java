@@ -3,7 +3,7 @@ package ru.gb.perov.Part2.HomeWork1.Obstacles;
 import ru.gb.perov.Part2.HomeWork1.Creature.Creature;
 
 public class JumpingTrack implements Obstacles {
-    int obsteclesSize;
+    private int obsteclesSize;
 
     public JumpingTrack(int obsteclesSize) {
         this.obsteclesSize = obsteclesSize;

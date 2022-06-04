@@ -2,8 +2,8 @@ package ru.gb.perov.Part2.HomeWork1.Creature;
 
 public class Cat implements Creature{
     String name;
-    int runLimit;
-    int jumpLimit;
+    private int runLimit;
+    private int jumpLimit;
 
     public Cat(String name, int runLimit, int jumpLimit) {
         this.name = name;
