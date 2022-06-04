@@ -1,4 +1,4 @@
-package ru.gb.perov;
+package ru.gb.perov.Part2.HomeWork1;
 
 import ru.gb.perov.Part2.HomeWork1.Creature.Cat;
 import ru.gb.perov.Part2.HomeWork1.Creature.Creature;
