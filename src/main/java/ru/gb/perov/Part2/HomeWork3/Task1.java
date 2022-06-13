@@ -28,7 +28,7 @@ public class Task1 {
         HashMap<String, Integer> col2 = new HashMap<>();
         for (String element : col1) {
             if (col2.containsKey(String.valueOf(element))) {
-                col2.put(String.valueOf(element), col2.get(String.valueOf(element)) + 1);
+                col2.put(element, col2.get(String.valueOf(element)) + 1);
             } else {
                 col2.put(String.valueOf(element), 1);
             }
