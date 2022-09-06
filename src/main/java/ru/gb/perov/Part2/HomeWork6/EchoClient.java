@@ -14,6 +14,7 @@ public class EchoClient {
     public static void main(String[] args) {
         try {
             new EchoClient().start();
+
         } catch (NullPointerException e) {
             System.out.println("Сервер не принимает сообщения...");
         }
@@ -28,7 +29,6 @@ public class EchoClient {
         };
         Thread thread = new Thread(connectionThread);
         thread.start();
-
         Scanner scanner = new Scanner(System.in);
         while (!socket.isClosed()) {
             String message = scanner.nextLine();
@@ -56,6 +56,7 @@ public class EchoClient {
             System.out.println("Сервер отключён... Клиент также будет отключён");
         }
     }
+
     private void openConnection() throws IOException {
         try {
             socket = new Socket("localhost", 8189);
@@ -77,6 +78,7 @@ public class EchoClient {
             closeConnection();
         }
     }
+
     private void closeConnection() {
         if (in != null) {
             try {
