@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 public class EchoServer {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(8189)) {
             out.println("Ждём подключение клиента...");
             final Socket socket = serverSocket.accept();
@@ -25,38 +25,28 @@ public class EchoServer {
 
             Scanner scanner = new Scanner(System.in);
             try {
-                final Thread threadConsole = new Thread(() -> {
-                    while (!threadEcho.isInterrupted()) {
-                        String message = scanner.nextLine();
-                        try {
-                            out.writeUTF(message);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        if (message.equalsIgnoreCase("/end")) {
-                            System.out.println("Сообщение от сервера: " + message);
-                            System.out.println("Сеанс связи закончен. Сервер и/или клиент будут закрыты.");
-                            threadEcho.interrupt();
-                            break;
-                        } else if (threadEcho.isInterrupted()) {
-                            if (message != "") {
-                                System.out.println("Клиент отключился. Ваше последнее сообщение (" + message + ") не будет отправлено");
-                                System.out.println("Сеанс связи закончен.Сервер будет закрыт.");
-                                break;
-                            } else {
-                                System.out.println("Клиент отключился.");
-                                System.out.println("Сеанс связи закончен.Сервер будет закрыт.");
-                                break;
-                            }
-                        }
+                while (!threadEcho.isInterrupted()) {
+                    String message = scanner.nextLine();
+                    out.writeUTF(message);
+                    if (message.equalsIgnoreCase("/end")) {
                         System.out.println("Сообщение от сервера: " + message);
+                        System.out.println("Сеанс связи закончен. Сервер и/или клиент будут закрыты.");
+                        threadEcho.interrupt();
+                        break;
+                    } else if (threadEcho.isInterrupted()) {
+                        if (message != "") {
+                            System.out.println("Клиент отключился. Ваше последнее сообщение (" + message + ") не будет отправлено");
+                            System.out.println("Сеанс связи закончен.Сервер будет закрыт.");
+                            break;
+                        } else {
+                            System.out.println("Клиент отключился.");
+                            System.out.println("Сеанс связи закончен.Сервер будет закрыт.");
+                            break;
+                        }
                     }
-                });
-                threadConsole.setDaemon(true);
-                threadConsole.start();
-                threadConsole.sleep(2000);
-
-            } catch (NoSuchElementException e) {
+                    System.out.println("Сообщение от сервера: " + message);
+                }
+            } catch (IOException | NoSuchElementException e) {
                 e.printStackTrace();
             }
         } catch (IOException | RuntimeException e) {
@@ -72,7 +62,7 @@ public class EchoServer {
                 System.out.println("Сообщение от клиента: " + message);
                 out.writeUTF("[echo] " + message);
                 if ("/end".equalsIgnoreCase(message)) {
-                    System.out.println("Клиент отключился. Сервер также будет закрыт.");
+                    System.out.println("Клиент отключился. Нажмите ENTER для отключения сервера.");
                     Thread.currentThread().interrupt();
                     return;
                 }

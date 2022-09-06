@@ -14,12 +14,12 @@ public class EchoClient {
     public static void main(String[] args) {
         try {
             new EchoClient().start();
-        } catch (NullPointerException | InterruptedException e) {
+
+        } catch (NullPointerException e) {
             System.out.println("Сервер не принимает сообщения...");
         }
     }
-
-    private void start() throws InterruptedException {
+    private void start() {
         Runnable connectionThread = () -> {
             try {
                 openConnection();
@@ -30,36 +30,25 @@ public class EchoClient {
         Thread thread = new Thread(connectionThread);
         thread.start();
         Scanner scanner = new Scanner(System.in);
-        final Thread threadConsole = new Thread(() -> {
-            try {
-                while (!socket.isClosed()) {
-                    final String message = scanner.nextLine();
-                    sendMessage(message);
-                    if (message.equalsIgnoreCase("/end")) {
-                        try {
-                            thread.join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("Сеанс связи закончен со стороны клиента. Сервер и клиент будут закрыты.");
-                        break;
-                    }
+        while (!socket.isClosed()) {
+            String message = scanner.nextLine();
+            sendMessage(message, thread.isInterrupted());
+            if (message.equalsIgnoreCase("/end")) {
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            } catch (NullPointerException e) {
-                System.out.println("Соккет не принимает сообщения");
+                System.out.println("Сеанс связи закончен со стороны клиента. Сервер и клиент будут закрыты.");
+                break;
             }
-        });
-        threadConsole.setDaemon(true);
-        threadConsole.start();
-        threadConsole.sleep(2000);
+        }
     }
 
-
-
-    private void sendMessage(String message) {
+    private void sendMessage(String message, boolean interrupted) {
         try {
             out.writeUTF(message);
-            System.out.println("Сообщение от клиента: " + message);
+            System.out.println("Сообщение от клиента: " + message );
         } catch (IOException e) {
             if (message != "") {
                 System.out.println("Сообщение от клиента: (" + message + ") не будет отправлено");
@@ -77,7 +66,7 @@ public class EchoClient {
                 final String message = in.readUTF();
                 System.out.println("Сообщение от сервера: " + message);
                 if ("/end".equalsIgnoreCase(message)) {
-                    System.out.println("Сервер отключился. Клиент также будет закрыт");
+                    System.out.println("Сервер отключился. Нажмите ENTER для отключения клиента");
                     Thread.currentThread().interrupt();
                     break;
                 } else if ("[echo] /end".equalsIgnoreCase(message)) {
