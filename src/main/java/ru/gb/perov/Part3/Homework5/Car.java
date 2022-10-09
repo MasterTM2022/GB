@@ -1,7 +1,6 @@
 package ru.gb.perov.Part3.Homework5;
 
-import static ru.gb.perov.Part3.Homework5.MainClass.cyclicBarrier;
-import static ru.gb.perov.Part3.Homework5.MainClass.lockVictory;
+import static ru.gb.perov.Part3.Homework5.MainClass.*;
 
 public class Car implements Runnable {
     private static int CARS_COUNT;

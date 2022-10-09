@@ -20,7 +20,7 @@ import static ru.gb.perov.Part3.Homework5.Car.getCarsPlace;
 */
 public class MainClass {
     public static final int NUMBERS_OF_CARS = 4;
-    public static final CyclicBarrier cyclicBarrier = new CyclicBarrier(NUMBERS_OF_CARS);
+    public static final CyclicBarrier cyclicBarrier = new CyclicBarrier(NUMBERS_OF_CARS+1);
     public static final Semaphore semaphore = new Semaphore(NUMBERS_OF_CARS / 2);
     public static Lock lockVictory = new ReentrantLock();
 
@@ -30,11 +30,9 @@ public class MainClass {
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
         Car[] cars = new Car[NUMBERS_OF_CARS];
 
-
         for (int i = 0; i < cars.length; i++) {
             cars[i] = new Car(race, 20 + (int) (Math.random() * 10));
         }
-        System.out.println("\u001B[32m" + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!" + "\u001B[0m");
 
 //        for (int i = 0; i < cars.length; i++) {
 //            new Thread(cars[i]).start();
@@ -43,6 +41,13 @@ public class MainClass {
         ExecutorService service = Executors.newFixedThreadPool(NUMBERS_OF_CARS);
         for (Car thisCar : cars) {
             service.submit(() -> new Thread(thisCar).start());
+        }
+
+        try {
+            cyclicBarrier.await();
+            System.out.println("\u001B[32m" + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!" + "\u001B[0m");
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
         }
         service.shutdown();
 
