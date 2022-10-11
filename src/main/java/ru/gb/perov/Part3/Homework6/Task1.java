@@ -12,7 +12,6 @@ RuntimeException.
 
 import java.util.Arrays;
 public class Task1 {
-
     public static final int SIZE_OF_ARRAY = 10000;
     public static final int MAX_VALUE_OF_ELEMENT = 10;
     public static final int BARRIER_VALUE = 4;

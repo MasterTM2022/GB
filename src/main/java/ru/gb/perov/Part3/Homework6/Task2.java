@@ -20,6 +20,7 @@ public class Task2 {
     public static void main(String[] args) {
         System.out.println(checkArray(fillArray()));
     }
+
     static boolean checkArray(int[] array) {
         int sum = 0;
         for (int j : array) {
@@ -30,6 +31,7 @@ public class Task2 {
         }
         return sum != FIRST_ELEMENTS * array.length && sum != SECOND_ELEMENTS * array.length;
     }
+
     private static int[] fillArray() {
         int[] array = new int[SIZE_OF_ARRAY];
         for (int i = 0; i < SIZE_OF_ARRAY; i++) {
